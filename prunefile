@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+from pruner import task
+
+task.default(':target')
+
+@task('.html', '.md')
+def _md_html(task):
+  print('running', task)
+  with open(task.name, 'w') as f:
+    f.write('heyo')
+
+@task(':target', 'source.html')
+def _target(task):
+  print('running', task)
+
