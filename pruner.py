@@ -13,7 +13,8 @@ parser.add_argument('-v', '--verbose', action='store_true', help='Verbose')
 parser.add_argument('tasks', nargs='*', help='Tasks to run')
 args = parser.parse_args()
 
-os.chdir(os.path.abspath(sys.path[0]))
+if __name__ == '__main__':
+  os.chdir(os.path.abspath(sys.path[0]))
 
 class Pruner(object):
   tasks = nx.DiGraph()

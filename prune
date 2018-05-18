@@ -15,12 +15,14 @@ while True:
   if prunefile: break
 
   parent = os.path.dirname(cwd)
-  if cwd == parent: break
+  if cwd == parent: break # we're at the root
   cwd = parent
 
 if not prunefile:
   print('prunefile not found')
   sys.exit(1)
+
+os.chdir(cwd)
 
 from importlib.util import spec_from_loader, module_from_spec
 from importlib.machinery import SourceFileLoader
