@@ -107,7 +107,7 @@ class Task:
 
   def source(self):
     sources = self.sources()
-    if len(sources) == 0: return none
+    if len(sources) == 0: return None
     return sources[0]
 
   def run(self):
