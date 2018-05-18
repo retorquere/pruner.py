@@ -133,18 +133,16 @@ class Task:
       if args.dry_run or args.verbose: Pruner.msg(f'running: {self.name}')
 
       if args.dry_run:
-        updated = None
+        mtime = sys.maxsize
       else:
         updated = self.action(self)
 
-      if self.name[0] == ':':
-        mtime = 0 if updated == False else sys.maxsize # actions are always 'updated' unless they return false
-      elif args.dry_run:
-        mtime = sys.maxsize
-      elif not os.path.exists(self.name):
-        Pruner.error(f'{self.name} failed to create target file')
-      else:
-        mtime = os.path.getmtime(self.name)
+        if self.name[0] == ':':
+          mtime = 0 if updated == False else sys.maxsize # actions are always 'updated' unless they return false
+        elif not os.path.exists(self.name):
+          Pruner.error(f'{self.name} failed to create target file')
+        else:
+          mtime = os.path.getmtime(self.name)
 
     return mtime
 
